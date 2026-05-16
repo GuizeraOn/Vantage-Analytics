@@ -1,23 +1,24 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-let _supabase: SupabaseClient | null = null
+let _client: SupabaseClient | null = null
 
-export function getSupabase(): SupabaseClient {
-  if (!_supabase) {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    _supabase = createClient(supabaseUrl, supabaseAnonKey)
+function getSupabase(): SupabaseClient {
+  if (!_client) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    if (!url || !key) {
+      throw new Error('Supabase env vars not set')
+    }
+    _client = createClient(url, key)
   }
-  return _supabase
+  return _client
 }
 
-// Backward-compat default export
-export const supabase = {
-  from: (...args: Parameters<SupabaseClient['from']>) => getSupabase().from(...args),
-  auth: new Proxy({} as SupabaseClient['auth'], {
-    get: (_target, prop) => {
-      const client = getSupabase()
-      return (client.auth as any)[prop]
-    },
-  }),
-}
+// Full transparent proxy — every property/method delegates to the real client
+export const supabase = new Proxy({} as SupabaseClient, {
+  get(_target, prop: string | symbol) {
+    const client = getSupabase()
+    const value = (client as any)[prop]
+    return typeof value === 'function' ? value.bind(client) : value
+  },
+})
