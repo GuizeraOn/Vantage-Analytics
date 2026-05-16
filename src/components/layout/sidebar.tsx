@@ -4,10 +4,16 @@ import { BarChart3, LayoutDashboard, PlusCircle, Target } from 'lucide-react'
 import Link from 'next/link'
 
 export async function Sidebar() {
-  const { data: tests } = await supabase
-    .from('tests')
-    .select('id, name')
-    .order('created_at', { ascending: false })
+  let tests: { id: string; name: string }[] = []
+  try {
+    const { data } = await supabase
+      .from('tests')
+      .select('id, name')
+      .order('created_at', { ascending: false })
+    tests = data ?? []
+  } catch {
+    // Supabase unavailable at build time — render empty sidebar
+  }
 
   return (
     <aside className="w-64 border-r border-primary/10 bg-card/20 backdrop-blur-xl flex flex-col h-screen sticky top-0">
