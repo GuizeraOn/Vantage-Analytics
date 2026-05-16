@@ -4,8 +4,8 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
-| 1 | Setup & Core | Configurar projeto Next.js, Shadcn (com tema), Supabase e registro básico de testes | CORE-01, CORE-02, CORE-03 | 3 |
-| 2 | Dashboard & Analytics | Construir a interface do dashboard com todas as métricas financeiras e funil | DASH-01, DASH-02, DASH-03, DASH-04, FUN-01 | 3 |
+| 1 | Setup & Core | Configurar projeto Next.js, Shadcn (com tema), Supabase e registro básico de testes | CORE-01, CORE-02, CORE-03 | Complete ✓ |
+| 2 | Dashboard & Analytics | Construir a interface do dashboard com todas as métricas financeiras e funil | DASH-01, DASH-02, DASH-03, DASH-04, FUN-01 | Complete ✓ |
 
 ## Phase Details
 

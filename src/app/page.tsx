@@ -11,7 +11,7 @@ export default async function HomePage() {
     <div className="p-8 space-y-8">
       <div className="flex flex-col gap-2">
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
-          Bem-vindo ao <span className="text-primary">FunnelNova</span>
+          Bem-vindo ao <span className="text-primary">Vantage Analytics</span>
         </h1>
         <p className="text-muted-foreground text-lg">
           Otimize suas operações de Direct Response com tracking de alta precisão.

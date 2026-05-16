@@ -14,7 +14,7 @@ export async function Sidebar() {
       <div className="p-6">
         <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary">
           <Target className="w-6 h-6" />
-          <span>FunnelNova</span>
+          <span>Vantage Analytics</span>
         </Link>
       </div>
 

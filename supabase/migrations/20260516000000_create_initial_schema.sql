@@ -26,3 +26,20 @@ INSERT INTO tests (name, variation_a, variation_b, duration_days) VALUES
 ('Checkout Layout - Mobile', 'Layout Padrão', 'Layout 1-Step', 14),
 ('Pricing Tier Test', 'Preço R$ 97', 'Preço R$ 147', 30);
 
+-- Seed metrics for 'VSL Headline Test - Maio'
+DO $$
+DECLARE
+    test_uuid UUID;
+BEGIN
+    SELECT id INTO test_uuid FROM tests WHERE name = 'VSL Headline Test - Maio' LIMIT 1;
+    
+    INSERT INTO test_metrics (test_id, metric_name, value_a, value_b) VALUES
+    (test_uuid, 'Cliques', 1156, 1240),
+    (test_uuid, 'Visitas Página', 1046, 1180),
+    (test_uuid, 'ICs', 208, 250),
+    (test_uuid, 'Vendas Iniciadas', 31, 45),
+    (test_uuid, 'Vendas Aprovadas', 21, 35),
+    (test_uuid, 'Faturamento Bruto', 1200.50, 1850.75),
+    (test_uuid, 'Gastos Anúncios', 643.19, 700.00);
+END $$;
+

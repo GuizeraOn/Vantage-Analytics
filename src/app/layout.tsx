@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Funnel Tracker | Performance Analytics",
-  description: "A/B test tracking and performance analytics for direct response funnels.",
+  title: "Vantage Analytics | Performance Dashboard",
+  description: "Advanced A/B test tracking and performance analytics for direct response funnels.",
 };
 
 export default function RootLayout({
