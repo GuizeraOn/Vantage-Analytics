@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { createTest } from '@/app/actions/tests'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'

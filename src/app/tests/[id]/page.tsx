@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { FunnelChart } from '@/components/dashboard/funnel-chart'
 import { MetricCard } from '@/components/dashboard/metric-card'
 import { supabase } from '@/lib/supabase'
