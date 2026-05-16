@@ -3,7 +3,7 @@ import { MetricCard } from '@/components/dashboard/metric-card'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 
-export default async function TestDashboardPage({ params }: { params: { id: string } }) {
+export default async function TestDashboardPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
 
   // Fetch test details
