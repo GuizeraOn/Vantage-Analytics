@@ -24,7 +24,7 @@ export async function createTest(formData: FormData) {
 
   if (error) {
     console.error('Error creating test:', error)
-    return { error: error.message }
+    return
   }
 
   // Redirect to the test dashboard (to be implemented in Phase 2)
