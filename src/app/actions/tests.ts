@@ -3,14 +3,14 @@
 import { supabase } from '@/lib/supabase'
 import { redirect } from 'next/navigation'
 
-export async function createTest(formData: FormData) {
+export async function createTest(_prevState: any, formData: FormData) {
   const name = formData.get('name') as string
   const variation_a = formData.get('variation_a') as string
   const variation_b = formData.get('variation_b') as string
   const duration_days = parseInt(formData.get('duration_days') as string)
 
   if (!name || !variation_a || !variation_b || !duration_days) {
-    return
+    return { error: 'Preencha todos os campos.' }
   }
 
   let testId: string
@@ -24,13 +24,13 @@ export async function createTest(formData: FormData) {
 
     if (error) {
       console.error('Supabase insert error:', error.message)
-      return
+      return { error: `Erro ao salvar: ${error.message}` }
     }
 
     testId = data.id
-  } catch (err) {
-    console.error('Unexpected error creating test:', err)
-    return
+  } catch (err: any) {
+    console.error('Unexpected error:', err)
+    return { error: `Erro inesperado: ${err?.message || 'Tente novamente.'}` }
   }
 
   redirect(`/tests/${testId}`)
