@@ -6,7 +6,7 @@
 <domain>
 ## Phase Boundary
 
-Configurar projeto Next.js, Shadcn (com tema), Supabase e registro básico de testes.
+Configurar a infraestrutura básica do projeto Next.js, integrar com Supabase (tabelas de testes e métricas), aplicar o tema Shadcn (Deep Purple) e implementar o formulário de registro de novos testes de funil.
 
 </domain>
 
@@ -14,18 +14,21 @@ Configurar projeto Next.js, Shadcn (com tema), Supabase e registro básico de te
 ## Implementation Decisions
 
 ### Formulário de Registro
-- Campos obrigatórios: Nome do teste, Variação A, Variação B, Duração
-- Duração do teste definida em dias (ex: 7, 14, 30)
-- Após salvar o teste, redireciona para o Dashboard do teste
-- Layout do formulário renderizado em um card centralizado (simples)
+- Campos obrigatórios: Nome do teste, Variação A, Variação B e Duração.
+- Duração do teste definida em dias (ex: 7, 14, 30).
+- Após salvar o teste, o sistema redireciona o usuário para o dashboard do teste criado.
+- Layout do formulário: Card centralizado na página, seguindo a estética clean.
 
 ### Integração Supabase
-- Autenticação v1: Login com email/senha padrão
-- Tabela de testes: tests(id, name, var_a, var_b, duration_days, created_at, status)
-- Cliente: Usar @supabase/ssr para Next.js App Router
+- Autenticação: v1 sem autenticação obrigatória (foco no dashboard de uso interno).
+- Estrutura de banco: Tabelas `tests` (metadados do teste) e `test_metrics` (resultados diários/acumulados) vinculadas.
+- Abordagem técnica: Uso de Server Actions para mutações e SSR para leitura de dados.
+- Seed data: O sistema deve iniciar com 3 testes fictícios populados para demonstração imediata do dashboard.
 
 ### the agent's Discretion
-Todos os detalhes adicionais de setup (Tailwind config, variáveis de ambiente) ficam a critério do agente, garantindo aderência ao tema Shadcn solicitado.
+- Escolha da estrutura de pastas (App Router).
+- Definição precisa dos schemas das tabelas no Supabase (SQL).
+- Implementação dos toasts de feedback.
 
 </decisions>
 
@@ -33,26 +36,28 @@ Todos os detalhes adicionais de setup (Tailwind config, variáveis de ambiente) 
 ## Existing Code Insights
 
 ### Reusable Assets
-- N/A (Greenfield)
+- None (Greenfield project).
 
 ### Established Patterns
-- N/A (Greenfield)
+- Next.js 14+ App Router patterns.
+- Shadcn component usage for buttons, inputs, and cards.
 
 ### Integration Points
-- N/A (Greenfield)
+- Supabase client initialization.
+- Vercel deployment config.
 
 </code_context>
 
 <specifics>
 ## Specific Ideas
-
-No specific requirements — open to standard approaches.
+- Tema: Deep Purple (https://tweakcn.com/themes/cmlh0x713000104jrgmds6vcd).
+- Métricas a serem suportadas (nas tabelas): Faturamento Líquido, Vendas Pendentes, Margem, Lucro, CPA, Gastos, ROAS, ROI, Funil (Cliques -> Visitas -> ICs -> Vendas Iniciais -> Vendas Apr.).
 
 </specifics>
 
 <deferred>
 ## Deferred Ideas
-
-None — discussion stayed within phase scope.
+- Autenticação de usuário (Login/Signup).
+- Integração automática com APIs do Meta Ads.
 
 </deferred>
