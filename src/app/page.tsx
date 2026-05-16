@@ -5,9 +5,15 @@ import { supabase } from '@/lib/supabase'
 import { BarChart, Layers, Target } from 'lucide-react'
 
 export default async function HomePage() {
-  const { count } = await supabase
-    .from('tests')
-    .select('*', { count: 'exact', head: true })
+  let count = 0
+  try {
+    const { count: c } = await supabase
+      .from('tests')
+      .select('*', { count: 'exact', head: true })
+    count = c ?? 0
+  } catch {
+    // Supabase unavailable
+  }
 
   return (
     <div className="p-8 space-y-8">

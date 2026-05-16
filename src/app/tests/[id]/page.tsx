@@ -8,22 +8,28 @@ import { notFound } from 'next/navigation'
 export default async function TestDashboardPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
 
-  // Fetch test details
-  const { data: test, error: testError } = await supabase
-    .from('tests')
-    .select('*')
-    .eq('id', id)
-    .single()
+  let test: any = null
+  let metrics: any[] = []
 
-  if (testError || !test) {
+  try {
+    const { data, error } = await supabase
+      .from('tests')
+      .select('*')
+      .eq('id', id)
+      .single()
+
+    if (error || !data) return notFound()
+    test = data
+
+    const { data: metricsData } = await supabase
+      .from('test_metrics')
+      .select('*')
+      .eq('test_id', id)
+
+    metrics = metricsData ?? []
+  } catch {
     return notFound()
   }
-
-  // Fetch metrics
-  const { data: metrics, error: metricsError } = await supabase
-    .from('test_metrics')
-    .select('*')
-    .eq('test_id', id)
 
   // Transform metrics for easier consumption
   const metricMap = metrics?.reduce((acc: any, m: any) => {
